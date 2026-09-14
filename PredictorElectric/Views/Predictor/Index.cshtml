@@ -1,0 +1,65 @@
+﻿@model PredictorViewModel
+@{
+	ViewData["Title"] = "Home";
+}
+
+<div class="card border-1 shadow-sm mx-auto" style="max-width: 900px;">
+	<div class="card-body p-4">
+
+		<h4 class="fw-semibold mb-1">Datos históricos del consumo eléctrico </h4>
+		<p class="text-muted mb-4">Ingrese los datos desde el més más antiguo hasta el más reciente.</p>
+
+		<form asp-controller="Predictor" asp-action="CalculatePrediction" method="post">
+			<div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+			<span asp-validation-for="ConsumptionData.MonthlyConsumptions" class="text-danger"></span>
+			@for (int i = 0; i < 12; i++)
+			{
+				<div class="row g-3 mb-3">
+					<div class="col-md-6">
+						<label asp-for="ConsumptionData.MonthlyConsumptions[i].Date" class="form-label">Fecha @(i + 1)</label>
+						<input asp-for="ConsumptionData.MonthlyConsumptions[i].Date" type="date" class="form-control" />
+						<span asp-validation-for="ConsumptionData.MonthlyConsumptions[i].Date" class="text-danger"></span>
+					</div>
+
+					<div class="col-md-6">
+						<label asp-for="ConsumptionData.MonthlyConsumptions[i].Consumption" class="form-label"> Consumo @(i + 1)</label>
+						<input asp-for="ConsumptionData.MonthlyConsumptions[i].Consumption" type="number" class="form-control" />
+						<span asp-validation-for="ConsumptionData.MonthlyConsumptions[i].Consumption" class="text-danger"></span>
+					</div>
+				</div>
+			}
+
+			<div class="text-center mt-5">
+				<button type="submit" class="btn fw-semibold text-white" style="background-color: var(--accent);">
+					Calcular predicción
+				</button>
+			</div>
+		</form>
+
+		@if (Model.PredictionResult != null)
+		{
+			<div id="resultado" class="mt-4">
+				@if (Model.PredictionResult.SmaResult != null)
+				{
+					<partial name="Partials/_SmaResult" model="Model.PredictionResult.SmaResult" />
+				}
+				@if (Model.PredictionResult.LinearRegressionResult != null)
+				{
+					<partial name="Partials/_LinearRegressionResult" model="Model.PredictionResult.LinearRegressionResult" />
+				}
+				@if (Model.PredictionResult.PercentageVariationResult != null)
+				{
+					<partial name="Partials/_PercentageVariationResult" model="Model.PredictionResult.PercentageVariationResult" />
+				}
+				@if (Model.PredictionResult.TrendDetectionResult != null)
+				{
+					<partial name="Partials/_TrendDetectionResult" model="Model.PredictionResult.TrendDetectionResult" />
+				}
+			</div>
+		}
+	</div>
+</div>
+
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+}

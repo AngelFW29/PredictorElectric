@@ -1,0 +1,17 @@
+﻿@model PredictionModeViewModel
+@{
+	ViewData["Title"] = "Modos";
+}
+<div class="row mx-auto">
+	<p class="text-start fs-4 fw-semibold">Selecciona el modo de predicción que deseas utilizar:</p>
+
+	<form asp-action="SavePredictionMode" asp-controller="Predictor" method="post">
+		<select asp-for="SelectedMode" class="form-select form-select-lg mb-3" aria-label="Large select"
+				onchange="this.form.submit()">
+			<option value="1">Promedio Móvil Simple (SMA)</option>
+			<option value="2">Regresión Lineal</option>
+			<option value="3">Variación Porcentual</option>
+			<option value="4">Detección de Tendencias</option>
+		</select>
+	</form>
+</div>

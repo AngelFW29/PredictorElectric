@@ -1,0 +1,12 @@
+﻿@model PredictorElectric.Business.Dtos.TrendDetectionDto
+@using PredictorElectric.Helpers
+
+<div class="card border-0 shadow-sm mt-4" style="border-left: 4px solid var(--accent) !important;">
+	<div class="card-body">
+		<h5 class="fw-semibold" style="color: var(--text-dark);">Predicción de Detección de Tendencia</h5>
+		<p class="mb-1">Meses que aumentaron: <strong>@Model.IncreasedMonthsCount</strong></p>
+		<p class="mb-1">Meses que disminuyeron: <strong>@Model.DecreasedMonthsCount</strong></p>
+		<p class="mb-1">Meses estables: <strong>@Model.StableMonthsCount</strong></p>
+		<p class="mb-0">Tendencia general: <strong>@TrendTypeHelper.ToTrendWording(Model.Tendency)</strong></p>
+	</div>
+</div>

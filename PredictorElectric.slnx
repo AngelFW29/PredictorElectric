@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="PredictorElectric.Business/PredictorElectric.Business.csproj" />
+  <Project Path="PredictorElectric/PredictorElectric.csproj" />
+</Solution>

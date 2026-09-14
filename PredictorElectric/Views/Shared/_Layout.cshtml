@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@ViewData["Title"] | Predictor Eléctrico</title>
+	<script type="importmap"></script>
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/PredictorElectric.styles.css" asp-append-version="true" />
+	<link rel="icon" type="image/x-icon" href="~/lightning-fill.ico">
+</head>
+<body>
+	<header>
+		<nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom mb-3" style="border-bottom: 2px solid var(--accent) !important;">
+			<div class="container-fluid">
+				<a class="navbar-brand fw-bold" style="color: var(--text-dark);" asp-controller="Predictor" asp-action="Index">
+					<i class="bi bi-lightning-fill me-2 ">Predictor Eléctrico</i>
+
+				</a>
+				<ul class="navbar-nav flex-grow-1">
+					<li class="nav-item">
+						<a class="nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Index" ? "fw-bold" : "text-dark")"
+						   style="@(ViewContext.RouteData.Values["action"]?.ToString() == "Index" ? "color: var(--accent) !important;" : "")"
+						   asp-controller="Predictor" asp-action="Index">Home</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link @(ViewContext.RouteData.Values["action"]?.ToString() == "Modos" ? "fw-bold" : "text-dark")"
+						   style="@(ViewContext.RouteData.Values["action"]?.ToString() == "Modos" ? "color: var(--accent) !important;" : "")"
+						   asp-controller="Predictor" asp-action="Modos">Modos</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	</header>
+	<div class="container">
+		<main role="main" class="pb-3">
+			@RenderBody()
+		</main>
+	</div>
+
+	<footer class="border-top footer text-muted">
+		<div class="container text-center">
+			<span style="color: var(--text-dark);">&copy; @DateTime.Now.Year - Predictor de Consumo Eléctrico del Hogar</span>
+			<small>
+				— Desarrollado por
+				<a href="https://github.com/AngelFW29" target="_blank" style="color: var(--text-dark);" class="text-decoration-none ms-2">
+					<i class="bi bi-github"> AngelFW29</i>
+				</a>
+			</small>
+		</div>
+	</footer>
+
+
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+	<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/js/site.js" asp-append-version="true"></script>
+	@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

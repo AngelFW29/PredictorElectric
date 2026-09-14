@@ -1,0 +1,30 @@
+﻿@model PredictorElectric.Business.Dtos.PercentageVariationDto
+@using PredictorElectric.Helpers
+
+<div class="card border-0 shadow-sm mt-4" style="border-left: 4px solid var(--accent) !important;">
+	<div class="card-body">
+		<h5 class="fw-semibold" style="color: var(--text-dark);">Predicción de la Variation Porcentual</h5>
+		<div>
+			<p class="fw-semibold mb-2">Porcentaje de variación:</p>
+			<ul class="list-unstyled">
+				@for (int i = 0; i < Model.PercentageVariation.Count; i++)
+				{
+					var porcent = Model.PercentageVariation[i];
+					<li>
+						Mes @(i + 1):
+						@if (porcent == null)
+						{
+							<span>N/A</span>
+						}
+						else
+						{
+							<span>@porcent.Value.ToString("F2")%</span>
+						}
+					</li>
+				}
+			</ul>
+		</div>
+		<p class="mb-1">Promedio general de variación: <strong>@Model.AvgVariation.ToString("F2")%</strong></p>
+		<p class="mb-0">Tendencia del consumo: <strong>@TrendTypeHelper.ToChangeWording(Model.Tendency)</strong></p>
+	</div>
+</div>
