@@ -24,7 +24,9 @@
 				}
 			</ul>
 		</div>
-		<p class="mb-1">Promedio general de variación: <strong>@Model.AvgVariation.ToString("F2")%</strong></p>
+		<p class="mb-1">Promedio general de variación: 
+			<strong>@(Model.AvgVariation == null ? "N/A" : Model.AvgVariation.Value.ToString("F2") + "%")</strong>
+		</p>
 		<p class="mb-0">Tendencia del consumo: <strong>@TrendTypeHelper.ToChangeWording(Model.Tendency)</strong></p>
 	</div>
 </div>

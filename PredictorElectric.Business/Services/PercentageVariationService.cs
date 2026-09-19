@@ -29,8 +29,10 @@ namespace PredictorElectric.Business.Services
 
                 }
             }
-
-            double avgVariations = variations.Where(vrt => vrt != null).Select(vrt => vrt!.Value).Average();
+            bool hasValidVariations = variations.Any(v => v != null);
+            double? avgVariations = hasValidVariations
+                ? variations.Where(vrt => vrt != null).Select(vrt => vrt!.Value).Average()
+                : null;
 
             TrendType trend = avgVariations > 1 ? TrendType.RISING
                      : avgVariations < -1 ? TrendType.FALLING
